@@ -7,27 +7,46 @@
 //
 
 #import "ViewController.h"
-#import "KingAudioPlayer.h"
+#import "KingAudioPlayer+Format.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *playTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *loadPV;
 
-@property (nonatomic, weak) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UISlider *playSlider;
 
 @property (weak, nonatomic) IBOutlet UIButton *mutedBtn;
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
+@property (nonatomic, weak) NSTimer *timer;
+
+
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+-(NSTimer *)timer
+{
+    if (!_timer) {
+        NSTimer *timer=[NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(update) userInfo:self repeats:YES];
+        [[NSRunLoop currentRunLoop]addTimer:timer forMode:NSRunLoopCommonModes];
+        _timer=timer;
+    }
+    return _timer;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self timer];
+}
+-(void)update{
+    [self.playTimeLabel setText:[KingAudioPlayer shareInstance].currentTimeFormat];
+    [self.totalTimeLabel setText:[KingAudioPlayer shareInstance].totalTimeFormat];
+    [self.playSlider setValue:[KingAudioPlayer shareInstance].progress];
+    [self.volumeSlider setValue: [KingAudioPlayer shareInstance].volume];
+    [self.loadPV setProgress:[KingAudioPlayer shareInstance].loadDataProgress];
+    [self.mutedBtn setSelected:[KingAudioPlayer shareInstance].muted];
+}
 
 - (IBAction)play:(id)sender {
     
