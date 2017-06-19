@@ -9,7 +9,7 @@
 #import "KingAudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 #import "KingAudioPlayerRemoteResourceLoadDelegate.h"
-#import "NSURL+streaming.h"
+#import "NSURL+Scheme.h"
 #define kStatus @"status"
 #define kPlayback @"playbackLikelyToKeepUp"
 
@@ -56,9 +56,13 @@ static KingAudioPlayer *_shareInstance;
 -(void)playUrl:(NSURL *)url isCache:(BOOL)isCache
 {
     NSURL *currentURL=((AVURLAsset *)self.player.currentItem.asset).URL;
-    if ([url isEqual:currentURL]) {
+    if ([url isEqual:currentURL]||[[url streamingURL]isEqual:currentURL]) {
+        //当前播放任务已经存在 
         [self resume];
         return;
+    }
+    if (self.player.currentItem) {
+        [self removeObserver];
     }
     _url=url;
     
@@ -71,9 +75,7 @@ static KingAudioPlayer *_shareInstance;
     //网络音频的请求 是通过asset 调用代理相关方法实现，拦截加载请求，只需要修改其代理方法
     self.resourceLoaderDelegate=[KingAudioPlayerRemoteResourceLoadDelegate new];
     [asset.resourceLoader setDelegate:self.resourceLoaderDelegate queue:dispatch_get_main_queue()];
-    if (self.player.currentItem) {
-        [self removeObserver];
-    }
+    
 //    资源组织
     AVPlayerItem *item=[AVPlayerItem playerItemWithAsset:asset];
     
@@ -88,9 +90,6 @@ static KingAudioPlayer *_shareInstance;
 //    资源的播放
     self.player=[AVPlayer playerWithPlayerItem:item];
     
-
-    
-
 }
 
 -(void)pause
@@ -134,16 +133,32 @@ static KingAudioPlayer *_shareInstance;
 
 -(void)seekWithTimeProgress:(float)progress
 {
-    if (progress<0||progress>1) {
+    if (progress < 0 || progress > 1) {
         return;
     }
-    NSTimeInterval playTime=self.totalTime*progress;
-//    秒->影片时间
-    CMTime currentTime = CMTimeMake(playTime, NSEC_PER_SEC);
-
-    [self.player seekToTime:(currentTime) completionHandler:^(BOOL finished) {
-        finished?NSLog(@"确定加载"):NSLog(@"取消加载");
+    
+    // 可以指定时间节点去播放
+    // 时间: CMTime : 影片时间
+    // 影片时间 -> 秒
+    // 秒 -> 影片时间
+    
+    // 1. 当前音频资源的总时长
+    CMTime totalTime = self.player.currentItem.duration;
+    // 2. 当前音频, 已经播放的时长
+    //    self.player.currentItem.currentTime
+    
+    NSTimeInterval totalSec = CMTimeGetSeconds(totalTime);
+    NSTimeInterval playTimeSec = totalSec * progress;
+    CMTime currentTime = CMTimeMake(playTimeSec, 1);
+    
+    [self.player seekToTime:currentTime completionHandler:^(BOOL finished) {
+        if (finished) {
+            NSLog(@"确定加载这个时间点的音频资源");
+        }else {
+            NSLog(@"取消加载这个时间点的音频资源");
+        }
     }];
+
 }
 -(void)setRate:(float)rate
 {

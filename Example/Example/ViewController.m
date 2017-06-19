@@ -37,22 +37,45 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // slider开始滑动事件
+    [self.playSlider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
+    // slider滑动中事件
+    [self.playSlider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    // slider结束滑动事件
+    [self.playSlider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel | UIControlEventTouchUpOutside];
+    
+    
     [self timer];
 }
 -(void)update{
     [self.playTimeLabel setText:[KingAudioPlayer shareInstance].currentTimeFormat];
     [self.totalTimeLabel setText:[KingAudioPlayer shareInstance].totalTimeFormat];
-    [self.playSlider setValue:[KingAudioPlayer shareInstance].progress];
+//    [self.playSlider setValue:[KingAudioPlayer shareInstance].progress];
     [self.volumeSlider setValue: [KingAudioPlayer shareInstance].volume];
     [self.loadPV setProgress:[KingAudioPlayer shareInstance].loadDataProgress];
     [self.mutedBtn setSelected:[KingAudioPlayer shareInstance].muted];
 }
 
+-(void)progressSliderTouchBegan:(UISlider *)slider
+{
+//    [[KingAudioPlayer shareInstance]pause];
+
+}
+-(void)progressSliderValueChanged:(UISlider *)slider
+{
+    [[KingAudioPlayer shareInstance] seekWithTimeProgress:slider.value];
+
+}
+-(void)progressSliderTouchEnded:(UISlider *)slider
+{
+//    [[KingAudioPlayer shareInstance]resume];
+
+}
 - (IBAction)play:(id)sender {
     
     // http://120.25.226.186:32812/resources/videos/minion_01.mp4
     NSURL *url = [NSURL URLWithString:@"http://120.25.226.186:32812/resources/videos/minion_01.mp4"];
-    [[KingAudioPlayer shareInstance] playUrl:url];
+    [[KingAudioPlayer shareInstance] playUrl:url isCache:YES];
 //    [[XMGRemotePlayer shareInstance] playWithURL:url isCache:YES];
     
 }
@@ -65,9 +88,6 @@
 }
 - (IBAction)kuaijin:(id)sender {
     [[KingAudioPlayer shareInstance] seekWithTimeDiffer:15];
-}
-- (IBAction)progress:(UISlider *)sender {
-    [[KingAudioPlayer shareInstance] seekWithTimeProgress:sender.value];
 }
 - (IBAction)rate:(id)sender {
     [[KingAudioPlayer shareInstance] setRate:2];

@@ -51,8 +51,4 @@
     return [NSString stringWithFormat:@"%02zd:%02zd",(int)self.current/60,(int)self.current%60];
 }
 
-
-
-
-
 @end

@@ -64,9 +64,6 @@
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GWL-4k-3jh">
                                                 <rect key="frame" x="112.5" y="0.0" width="118" height="73"/>
-                                                <connections>
-                                                    <action selector="progress:" destination="BYZ-38-t0r" eventType="valueChanged" id="96W-S4-vaH"/>
-                                                </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syy-XN-N1E">
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="72"/>
