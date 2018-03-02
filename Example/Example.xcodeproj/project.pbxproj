@@ -13,6 +13,13 @@
 		0924B37F1EF18CBB00EC492D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0924B37D1EF18CBB00EC492D /* Main.storyboard */; };
 		0924B3811EF18CBB00EC492D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0924B3801EF18CBB00EC492D /* Assets.xcassets */; };
 		0924B3841EF18CBB00EC492D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0924B3821EF18CBB00EC492D /* LaunchScreen.storyboard */; };
+		09EA71FB1F13E71A0086A04D /* NSURL+Scheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA71EE1F13E71A0086A04D /* NSURL+Scheme.m */; };
+		09EA71FC1F13E71A0086A04D /* KingAudioPlayer+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA71F01F13E71A0086A04D /* KingAudioPlayer+Format.m */; };
+		09EA71FD1F13E71A0086A04D /* KingAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA71F21F13E71A0086A04D /* KingAudioPlayer.m */; };
+		09EA71FE1F13E71A0086A04D /* KingAudioPlayerDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA71F41F13E71A0086A04D /* KingAudioPlayerDownLoader.m */; };
+		09EA71FF1F13E71A0086A04D /* KingAudioPlayerFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA71F61F13E71A0086A04D /* KingAudioPlayerFormat.m */; };
+		09EA72001F13E71A0086A04D /* KingAudioPlayerRemoteResourceLoadDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA71F81F13E71A0086A04D /* KingAudioPlayerRemoteResourceLoadDelegate.m */; };
+		09EA72011F13E71A0086A04D /* KingRemoteAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA71FA1F13E71A0086A04D /* KingRemoteAudioFile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,20 @@
 		0924B3801EF18CBB00EC492D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0924B3831EF18CBB00EC492D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0924B3851EF18CBB00EC492D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09EA71ED1F13E71A0086A04D /* NSURL+Scheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Scheme.h"; sourceTree = "<group>"; };
+		09EA71EE1F13E71A0086A04D /* NSURL+Scheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Scheme.m"; sourceTree = "<group>"; };
+		09EA71EF1F13E71A0086A04D /* KingAudioPlayer+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KingAudioPlayer+Format.h"; sourceTree = "<group>"; };
+		09EA71F01F13E71A0086A04D /* KingAudioPlayer+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KingAudioPlayer+Format.m"; sourceTree = "<group>"; };
+		09EA71F11F13E71A0086A04D /* KingAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KingAudioPlayer.h; sourceTree = "<group>"; };
+		09EA71F21F13E71A0086A04D /* KingAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KingAudioPlayer.m; sourceTree = "<group>"; };
+		09EA71F31F13E71A0086A04D /* KingAudioPlayerDownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KingAudioPlayerDownLoader.h; sourceTree = "<group>"; };
+		09EA71F41F13E71A0086A04D /* KingAudioPlayerDownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KingAudioPlayerDownLoader.m; sourceTree = "<group>"; };
+		09EA71F51F13E71A0086A04D /* KingAudioPlayerFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KingAudioPlayerFormat.h; sourceTree = "<group>"; };
+		09EA71F61F13E71A0086A04D /* KingAudioPlayerFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KingAudioPlayerFormat.m; sourceTree = "<group>"; };
+		09EA71F71F13E71A0086A04D /* KingAudioPlayerRemoteResourceLoadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KingAudioPlayerRemoteResourceLoadDelegate.h; sourceTree = "<group>"; };
+		09EA71F81F13E71A0086A04D /* KingAudioPlayerRemoteResourceLoadDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KingAudioPlayerRemoteResourceLoadDelegate.m; sourceTree = "<group>"; };
+		09EA71F91F13E71A0086A04D /* KingRemoteAudioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KingRemoteAudioFile.h; sourceTree = "<group>"; };
+		09EA71FA1F13E71A0086A04D /* KingRemoteAudioFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KingRemoteAudioFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +79,7 @@
 		0924B3731EF18CBB00EC492D /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				09EA71EB1F13E71A0086A04D /* KingAudioPlayer */,
 				0924B3771EF18CBB00EC492D /* AppDelegate.h */,
 				0924B3781EF18CBB00EC492D /* AppDelegate.m */,
 				0924B37A1EF18CBB00EC492D /* ViewController.h */,
@@ -77,6 +99,36 @@
 				0924B3751EF18CBB00EC492D /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		09EA71EB1F13E71A0086A04D /* KingAudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				09EA71EC1F13E71A0086A04D /* Category */,
+				09EA71EF1F13E71A0086A04D /* KingAudioPlayer+Format.h */,
+				09EA71F01F13E71A0086A04D /* KingAudioPlayer+Format.m */,
+				09EA71F11F13E71A0086A04D /* KingAudioPlayer.h */,
+				09EA71F21F13E71A0086A04D /* KingAudioPlayer.m */,
+				09EA71F31F13E71A0086A04D /* KingAudioPlayerDownLoader.h */,
+				09EA71F41F13E71A0086A04D /* KingAudioPlayerDownLoader.m */,
+				09EA71F51F13E71A0086A04D /* KingAudioPlayerFormat.h */,
+				09EA71F61F13E71A0086A04D /* KingAudioPlayerFormat.m */,
+				09EA71F71F13E71A0086A04D /* KingAudioPlayerRemoteResourceLoadDelegate.h */,
+				09EA71F81F13E71A0086A04D /* KingAudioPlayerRemoteResourceLoadDelegate.m */,
+				09EA71F91F13E71A0086A04D /* KingRemoteAudioFile.h */,
+				09EA71FA1F13E71A0086A04D /* KingRemoteAudioFile.m */,
+			);
+			name = KingAudioPlayer;
+			path = ../../KingAudioPlayer;
+			sourceTree = "<group>";
+		};
+		09EA71EC1F13E71A0086A04D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				09EA71ED1F13E71A0086A04D /* NSURL+Scheme.h */,
+				09EA71EE1F13E71A0086A04D /* NSURL+Scheme.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,7 +162,7 @@
 				TargetAttributes = {
 					0924B3701EF18CBB00EC492D = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = GLHBVKZG33;
+						DevelopmentTeam = ZN667QX87P;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -152,7 +204,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0924B37C1EF18CBB00EC492D /* ViewController.m in Sources */,
+				09EA71FC1F13E71A0086A04D /* KingAudioPlayer+Format.m in Sources */,
+				09EA71FB1F13E71A0086A04D /* NSURL+Scheme.m in Sources */,
+				09EA71FF1F13E71A0086A04D /* KingAudioPlayerFormat.m in Sources */,
 				0924B3791EF18CBB00EC492D /* AppDelegate.m in Sources */,
+				09EA72011F13E71A0086A04D /* KingRemoteAudioFile.m in Sources */,
+				09EA71FD1F13E71A0086A04D /* KingAudioPlayer.m in Sources */,
+				09EA71FE1F13E71A0086A04D /* KingAudioPlayerDownLoader.m in Sources */,
+				09EA72001F13E71A0086A04D /* KingAudioPlayerRemoteResourceLoadDelegate.m in Sources */,
 				0924B3761EF18CBB00EC492D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +279,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -262,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -273,7 +332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GLHBVKZG33;
+				DEVELOPMENT_TEAM = ZN667QX87P;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Example;
@@ -285,7 +344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GLHBVKZG33;
+				DEVELOPMENT_TEAM = ZN667QX87P;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Example;

@@ -74,7 +74,7 @@
 - (IBAction)play:(id)sender {
     
     // http://120.25.226.186:32812/resources/videos/minion_01.mp4
-    NSURL *url = [NSURL URLWithString:@"http://120.25.226.186:32812/resources/videos/minion_01.mp4"];
+    NSURL *url = [NSURL URLWithString:@"http://cdn.xinchao.mobi/imgs/201711/5a02be4dbd7a5.mp4"];
     [[KingAudioPlayer shareInstance] playUrl:url isCache:YES];
 //    [[XMGRemotePlayer shareInstance] playWithURL:url isCache:YES];
     

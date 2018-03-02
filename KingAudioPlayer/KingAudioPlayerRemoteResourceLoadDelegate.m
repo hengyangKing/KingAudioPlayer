@@ -40,11 +40,11 @@
     // 1. 判断, 本地有没有该音频资源的缓存文件, 如果有 -> 直接根据本地缓存, 向外界响应数据(3个步骤) return
     NSURL *url = [loadingRequest.request.URL httpURL];
     
-    long long requestOffset = loadingRequest.dataRequest.requestedOffset;
-    long long currentOffset = loadingRequest.dataRequest.currentOffset;
-    if (requestOffset != currentOffset) {
-        requestOffset = currentOffset;
-    }
+    long long requestOffset = ((AVAssetResourceLoadingRequest *)self.loadingRequests.firstObject).dataRequest.currentOffset;
+//    long long currentOffset = loadingRequest.dataRequest.currentOffset;
+//    if (requestOffset != currentOffset) {
+//        requestOffset = currentOffset;
+//    }
     
     if ([KingRemoteAudioFile cacheFileExists:url]) {
         [self handleLoadingRequest:loadingRequest];
@@ -52,7 +52,6 @@
     }
     
     // 记录所有的请求
-    [self.loadingRequests addObject:loadingRequest];
     
     // 2. 判断有没有正在下载
     if (self.downLoader.loadedSize == 0) {
@@ -65,7 +64,7 @@
     // 3.1 当资源请求, 开始点 < 下载的开始点
     // 3.2 当资源的请求, 开始点 > 下载的开始点 + 下载的长度 + 666
     if (requestOffset < self.downLoader.offset || requestOffset > (self.downLoader.offset + self.downLoader.loadedSize + 666)) {
-        [self.downLoader downloadWithURL:url offset:requestOffset];
+        [self.downLoader downloadWithURL:url offset:0];
         return YES;
     }
     
@@ -136,48 +135,45 @@
 {
     //    NSLog(@"在这里不断的处理请求");
     NSLog(@"-----%@", self.loadingRequests);
-    NSMutableArray *deleteRequests = [NSMutableArray array];
-    for (AVAssetResourceLoadingRequest *loadingRequest in self.loadingRequests) {
-        // 1. 填充内容信息头
-        NSURL *url = loadingRequest.request.URL;
-        long long totalSize = self.downLoader.totalSize;
-        loadingRequest.contentInformationRequest.contentLength = totalSize;
-        NSString *contentType = self.downLoader.MIMEType;
-        loadingRequest.contentInformationRequest.contentType = contentType;
-        loadingRequest.contentInformationRequest.byteRangeAccessSupported = YES;
+//    NSMutableArray *deleteRequests = [NSMutableArray array];
+//    for (AVAssetResourceLoadingRequest *loadingRequest in self.loadingRequests) {
+    AVAssetResourceLoadingRequest *loadingRequest = self.loadingRequests.firstObject;
+    
+    
+    // 1. 填充内容信息头
+    NSURL *url = loadingRequest.request.URL;
+    long long totalSize = self.downLoader.totalSize;
+    loadingRequest.contentInformationRequest.contentLength = totalSize;
+    NSString *contentType = self.downLoader.MIMEType;
+    loadingRequest.contentInformationRequest.contentType = contentType;
+    loadingRequest.contentInformationRequest.byteRangeAccessSupported = YES;
         
-        // 2. 填充数据
-        NSData *data = [NSData dataWithContentsOfFile:[KingRemoteAudioFile tmpFilePath:url] options:NSDataReadingMappedIfSafe error:nil];
-        if (data == nil) {
-            data = [NSData dataWithContentsOfFile:[KingRemoteAudioFile cacheFilePath:url] options:NSDataReadingMappedIfSafe error:nil];
-        }
-        
-        long long requestOffset = loadingRequest.dataRequest.requestedOffset;
-        long long currentOffset = loadingRequest.dataRequest.currentOffset;
-        if (requestOffset != currentOffset) {
-            requestOffset = currentOffset;
-        }
-        NSInteger requestLength = loadingRequest.dataRequest.requestedLength;
-        
-        
-        long long responseOffset = requestOffset - self.downLoader.offset;
-        long long responseLength = MIN(self.downLoader.offset + self.downLoader.loadedSize - requestOffset, requestLength) ;
-        
-        NSData *subData = [data subdataWithRange:NSMakeRange(responseOffset, responseLength)];
-        
-        [loadingRequest.dataRequest respondWithData:subData];
-        
-        
-        
-        // 3. 完成请求(必须把所有的关于这个请求的区间数据, 都返回完之后, 才能完成这个请求)
-        if (requestLength == responseLength) {
-            [loadingRequest finishLoading];
-            [deleteRequests addObject:loadingRequest];
-        }
-        
+    // 2. 填充数据
+    NSData *data = [NSData dataWithContentsOfFile:[KingRemoteAudioFile tmpFilePath:url] options:NSDataReadingMappedIfSafe error:nil];
+    if (data == nil) {
+        data = [NSData dataWithContentsOfFile:[KingRemoteAudioFile cacheFilePath:url] options:NSDataReadingMappedIfSafe error:nil];
     }
     
-    [self.loadingRequests removeObjectsInArray:deleteRequests];
+    long long requestOffset = loadingRequest.dataRequest.currentOffset;
+//        long long currentOffset = loadingRequest.dataRequest.currentOffset;
+//        if (requestOffset != currentOffset) {
+//            requestOffset = currentOffset;
+//        }
+    NSInteger requestLength = loadingRequest.dataRequest.requestedLength;
+    
+    long long responseOffset = requestOffset - self.downLoader.offset;
+    long long responseLength = MIN(self.downLoader.offset + self.downLoader.loadedSize - requestOffset, requestLength) ;
+        
+    NSData *subData = [data subdataWithRange:NSMakeRange(responseOffset, responseLength)];
+    [loadingRequest.dataRequest respondWithData:subData];
+        
+    // 3. 完成请求(必须把所有的关于这个请求的区间数据, 都返回完之后, 才能完成这个请求)
+    if (requestLength == responseLength) {
+        [loadingRequest finishLoading];
+//        [deleteRequests addObject:loadingRequest];
+        [self.loadingRequests removeObject:loadingRequest];
+    }
+//    [self.loadingRequests removeObjectsInArray:deleteRequests];
     
 }
 @end
